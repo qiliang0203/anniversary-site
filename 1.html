@@ -14,52 +14,28 @@
       animation: pulse 1.2s infinite;
     }
     @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.2);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-    .hidden-page {
-      display: none;
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center text-center text-white p-6">
-
-  <!-- 第 1 页 -->
-  <div id="page1" class="w-full h-full flex flex-col items-center justify-center">
-    <h1 class="text-4xl md:text-6xl font-bold mb-8">我们已经在一起</h1>
-    <div id="counter" class="heart text-7xl md:text-9xl font-extrabold mb-4">0</div>
-    <h2 id="subtext" class="text-2xl md:text-3xl font-light">天</h2>
-    <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed"></p>
-    <button onclick="goToPage2()" class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">点我继续</button>
-  </div>
-
-  <!-- 第 2 页 -->
-  <div id="page2" class="hidden-page w-full h-full flex flex-col items-center justify-center">
-    <h1 class="text-5xl font-bold mb-6">❤️ 小惊喜 ❤️</h1>
-    <p class="text-xl max-w-lg leading-relaxed mb-10">
-      我们已经一起走过无数日子，每一天都因为有你而变得特别。<br>未来的第 1001 天、第 2000 天、第 10000 天……<br>我都希望牵着你的手一起走下去。
-    </p>
-    <button onclick="goToPage1()" class="bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">回到首页</button>
-  </div>
+  <h1 class="text-4xl md:text-6xl font-bold mb-8">我们已经在一起</h1>
+  <div id="counter" class="heart text-7xl md:text-9xl font-extrabold mb-4">0</div>
+  <h2 id="subtext" class="text-2xl md:text-3xl font-light">天</h2>
+  <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed"></p>
+  <a href="page2.html" class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">点我继续</a>
 
   <script>
-    const startDate = new Date('2022-08-01T00:00:00');
+    const startDate = new Date('2022-08-01T00:00:00'); // 改为你们实际日期
     const counterEl = document.getElementById('counter');
     const subtextEl = document.getElementById('subtext');
     const messageEl = document.getElementById('message');
 
     function updateDays() {
       const now = new Date();
-      const diff = now - startDate;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
+      const days = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
       counterEl.textContent = days;
 
       if (days >= 1000) {
@@ -67,22 +43,12 @@
         messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，也是 <span class="font-bold">1000 天纪念日</span>！<br/>感谢你的陪伴，未来的每一天都想和你一起度过 ❤️`;
       } else {
         const remain = 1000 - days;
+        subtextEl.textContent = '天';
         messageEl.innerHTML = `距离我们的 <span class="font-bold">1000 天纪念日</span> 还有 <span class="font-bold">${remain}</span> 天。<br/>期待与你一起迎接这一天！`;
       }
     }
 
-    function goToPage2() {
-      document.getElementById('page1').classList.add('hidden-page');
-      document.getElementById('page2').classList.remove('hidden-page');
-    }
-
-    function goToPage1() {
-      document.getElementById('page2').classList.add('hidden-page');
-      document.getElementById('page1').classList.remove('hidden-page');
-    }
-
     updateDays();
-    setInterval(updateDays, 1000 * 60 * 60);
   </script>
 </body>
 </html>
