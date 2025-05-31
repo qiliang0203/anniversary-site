@@ -1,60 +1,26 @@
+<!-- index.html（原 main.html） -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我们在一起的日子</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>我们的纪念站</title>
   <style>
-    body {
-      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
     }
-    .heart {
-      color: #ff4d6d;
-      animation: pulse 1.2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    iframe {
+      border: none;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center text-center text-white p-6">
+<body>
+  <!-- 背景音乐播放器 iframe（隐藏） -->
+  <iframe src="music.html" style="display:none;" name="bgm-player"></iframe>
 
-  <h1 class="text-4xl md:text-6xl font-bold mb-6">我们已经在一起</h1>
-
-  <div id="time" class="text-4xl md:text-6xl font-extrabold heart mb-4">加载中...</div>
-  <h2 class="text-2xl md:text-3xl font-light">🎉 1000 天纪念日 🎉</h2>
-  <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed text-white"></p>
-
-  <!-- “点我继续”按钮 -->
-  <a href="page2.html" target="content-frame"
-     class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
-    点我继续
-  </a>
-
-  <script>
-    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时间起点
-    const timeEl = document.getElementById('time');
-    const messageEl = document.getElementById('message');
-
-    function updateTime() {
-      const now = new Date();
-      const diffMs = now - startDate;
-      const totalSeconds = Math.floor(diffMs / 1000);
-      const days = Math.floor(totalSeconds / (60 * 60 * 24));
-      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
-      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>也是 <span class="font-bold">1000 天纪念日</span>！<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
-    }
-
-    updateTime();
-    setInterval(updateTime, 1000);
-  </script>
-
+  <!-- 主内容容器（page1.html, page2.html 将在这里加载） -->
+  <iframe src="page1.html" name="content-frame" style="width: 100vw; height: 100vh;"></iframe>
 </body>
 </html>
