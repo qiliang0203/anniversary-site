@@ -1,4 +1,3 @@
-<!-- music.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,18 +5,22 @@
   <title>背景音乐播放器</title>
 </head>
 <body style="margin: 0; padding: 0;">
+  <!-- 音乐播放器：默认静音、循环播放、控制按钮可见 -->
   <audio id="bgm" autoplay muted loop controls style="width: 100%; height: 100%;">
     <source src="陶喆-蝴蝶.mp3" type="audio/mpeg">
     您的浏览器不支持音乐播放。
   </audio>
 
   <script>
-    // 监听点击事件，用户一点击就尝试取消静音并播放
-    document.addEventListener('click', () => {
-      const audio = document.getElementById('bgm');
-      if (audio.muted) {
+    const audio = document.getElementById('bgm');
+
+    // 接收来自父页面的取消静音命令
+    window.addEventListener("message", (event) => {
+      if (event.data.action === "unmute") {
         audio.muted = false;
-        audio.play().catch(err => console.log('播放失败：', err));
+        audio.play().catch(() => {
+          console.warn("尝试播放音乐失败（可能是浏览器限制）");
+        });
       }
     });
   </script>
