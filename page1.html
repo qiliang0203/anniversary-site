@@ -28,14 +28,14 @@
   <h2 class="text-2xl md:text-3xl font-light">🎉 1000 天纪念日 🎉</h2>
   <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed text-white"></p>
 
-  <!-- 点我继续：跳转到 page2.html -->
-  <a href="page2.html" target="content-frame"
+  <!-- 点我继续：跳转到 page2.html，同时发送 unmute 指令 -->
+  <button id="continueBtn"
      class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
     点我继续
-  </a>
+  </button>
 
   <script>
-    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时间起点
+    const startDate = new Date('2022-09-10T22:00:00+08:00');
     const timeEl = document.getElementById('time');
     const messageEl = document.getElementById('message');
 
@@ -54,6 +54,14 @@
 
     updateTime();
     setInterval(updateTime, 1000);
+
+    // 点击按钮 -> 发送取消静音信息给 music.html -> 跳转 page2
+    document.getElementById("continueBtn").addEventListener("click", () => {
+      parent.frames["bgm-player"].postMessage({ action: "unmute" }, "*");
+      setTimeout(() => {
+        window.location.href = "page2.html";
+      }, 300); // 延迟跳转，确保音乐先播放
+    });
   </script>
 
 </body>
