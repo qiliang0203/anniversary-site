@@ -21,20 +21,28 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center text-center text-white p-6">
+
   <h1 class="text-4xl md:text-6xl font-bold mb-6">我们已经在一起</h1>
 
   <div id="time" class="text-4xl md:text-6xl font-extrabold heart mb-4">加载中...</div>
-
+  <h2 class="text-2xl md:text-3xl font-light">🎉 1000 天纪念日 🎉</h2>
   <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed text-white"></p>
 
-  <a href="page2.html" class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
+  <!-- “点我继续”按钮 -->
+  <button id="continueBtn"
+    class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
     点我继续
-  </a>
+  </button>
+
+  <!-- 音乐播放器 iframe -->
+  <iframe src="music.html"
+          style="position: fixed; bottom: 20px; left: 20px; width: 200px; height: 50px; border: none; z-index: 9999;"
+          allow="autoplay">
+  </iframe>
 
   <script>
-    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时区起点
+    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时间起点
     const timeEl = document.getElementById('time');
-    const subtextEl = document.getElementById('subtext');
     const messageEl = document.getElementById('message');
 
     function updateTime() {
@@ -47,17 +55,22 @@
       const seconds = totalSeconds % 60;
 
       timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
-      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
+      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>也是 <span class="font-bold">1000 天纪念日</span>！<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
     }
 
     updateTime();
     setInterval(updateTime, 1000);
+
+    // 触发 iframe 播放音乐 + 页面跳转
+    document.getElementById("continueBtn").addEventListener("click", () => {
+      const iframe = document.querySelector('iframe');
+      iframe.contentWindow.postMessage({ action: "unmute" }, "*");
+
+      setTimeout(() => {
+        window.location.href = "page2.html";
+      }, 300);
+    });
   </script>
 
-  <!-- 🎵 嵌入音乐播放器 iframe：播放不会随页面跳转中断 -->
-  <iframe src="music.html"
-          style="position: fixed; bottom: 20px; left: 20px; width: 200px; height: 50px; border: none; z-index: 9999;"
-          allow="autoplay">
-  </iframe>
 </body>
 </html>
