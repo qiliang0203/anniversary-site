@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我们的 1000 天纪念日</title>
+  <title>我们在一起的日子</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -29,16 +29,10 @@
   <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed text-white"></p>
 
   <!-- “点我继续”按钮 -->
-  <button id="continueBtn"
-    class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
+  <a href="page2.html" target="content-frame"
+     class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
     点我继续
-  </button>
-
-  <!-- 音乐播放器 iframe -->
-  <iframe src="music.html"
-          style="position: fixed; bottom: 20px; left: 20px; width: 200px; height: 50px; border: none; z-index: 9999;"
-          allow="autoplay">
-  </iframe>
+  </a>
 
   <script>
     const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时间起点
@@ -60,16 +54,6 @@
 
     updateTime();
     setInterval(updateTime, 1000);
-
-    // 触发 iframe 播放音乐 + 页面跳转
-    document.getElementById("continueBtn").addEventListener("click", () => {
-      const iframe = document.querySelector('iframe');
-      iframe.contentWindow.postMessage({ action: "unmute" }, "*");
-
-      setTimeout(() => {
-        window.location.href = "page2.html";
-      }, 300);
-    });
   </script>
 
 </body>
