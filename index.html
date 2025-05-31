@@ -1,4 +1,4 @@
-<!-- index.html（原 main.html） -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -17,10 +17,10 @@
   </style>
 </head>
 <body>
-  <!-- 背景音乐播放器 iframe（隐藏） -->
-  <iframe src="music.html" style="display:none;" name="bgm-player"></iframe>
+  <!-- 背景音乐播放器 iframe（添加 allow） -->
+  <iframe src="music.html" style="display:none;" name="bgm-player" allow="autoplay"></iframe>
 
-  <!-- 主内容容器（page1.html, page2.html 将在这里加载） -->
+  <!-- 主内容页面容器 -->
   <iframe src="page1.html" name="content-frame" style="width: 100vw; height: 100vh;"></iframe>
 </body>
 </html>
