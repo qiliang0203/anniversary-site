@@ -24,29 +24,15 @@
   <h1 class="text-4xl md:text-6xl font-bold mb-6">我们已经在一起</h1>
 
   <div id="time" class="text-4xl md:text-6xl font-extrabold heart mb-4">加载中...</div>
-  <h2 id="subtext" class="text-2xl md:text-3xl font-light">天 时 分 秒</h2>
+
   <p id="message" class="mt-10 text-xl md:text-2xl max-w-md leading-relaxed text-white"></p>
 
-  <!-- 播放按钮 -->
-  <button onclick="document.getElementById('bgm').play(); document.getElementById('bgm').muted = false;" 
-    class="mt-4 px-4 py-2 bg-white text-pink-600 font-bold rounded-full shadow-lg hover:scale-105 transition">
-    ▶️ 播放音乐
-  </button>
-
-  <!-- 音频播放器 -->
-  <audio id="bgm" autoplay muted loop>
-    <source src="陶喆-蝴蝶.mp3" type="audio/mpeg">
-    您的浏览器不支持音频播放。
-  </audio>
-
-  <!-- 页面跳转按钮 -->
   <a href="page2.html" class="mt-12 bg-white text-pink-600 font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
     点我继续
   </a>
 
   <script>
-    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时间
-
+    const startDate = new Date('2022-09-10T22:00:00+08:00'); // 中国时区起点
     const timeEl = document.getElementById('time');
     const subtextEl = document.getElementById('subtext');
     const messageEl = document.getElementById('message');
@@ -54,7 +40,6 @@
     function updateTime() {
       const now = new Date();
       const diffMs = now - startDate;
-
       const totalSeconds = Math.floor(diffMs / 1000);
       const days = Math.floor(totalSeconds / (60 * 60 * 24));
       const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / 3600);
@@ -62,12 +47,17 @@
       const seconds = totalSeconds % 60;
 
       timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
-      subtextEl.textContent = '🎉 1000 天纪念日 🎉';
-      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>也是 <span class="font-bold">1000 天纪念日</span>！<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
+      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
     }
 
     updateTime();
     setInterval(updateTime, 1000);
   </script>
+
+  <!-- 🎵 嵌入音乐播放器 iframe：播放不会随页面跳转中断 -->
+  <iframe src="music.html"
+          style="position: fixed; bottom: 20px; left: 20px; width: 200px; height: 50px; border: none; z-index: 9999;"
+          allow="autoplay">
+  </iframe>
 </body>
 </html>
