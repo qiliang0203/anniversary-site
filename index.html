@@ -49,14 +49,10 @@
 
       timeEl.textContent = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
 
-      if (days >= 1000) {
-        subtextEl.textContent = '🎉 1000 天纪念日 🎉';
-        messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>也是 <span class="font-bold">1000 天纪念日</span>！<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
-      } else {
-        const remain = 1000 - days;
-        messageEl.innerHTML = `距离我们的 <span class="font-bold">1000 天纪念日</span> 还有 <span class="font-bold">${remain}</span> 天。<br>期待与你一起迎接这一刻！`;
-      }
-    }
+    
+      subtextEl.textContent = '🎉 1000 天纪念日 🎉';
+      messageEl.innerHTML = `今天是我们在一起的第 <span class="font-bold">${days}</span> 天，<br>也是 <span class="font-bold">1000 天纪念日</span>！<br>感谢你的陪伴，未来的每一天我都想和你一起走过 ❤️`;
+    
 
     updateTime();
     setInterval(updateTime, 1000); // 每秒刷新
