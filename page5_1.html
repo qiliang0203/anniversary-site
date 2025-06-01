@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>纪念信 · page6</title>
+  <style>
+    body {
+      background: url('paper.jpg') no-repeat center center fixed; /* 背景图片 */
+      background-size: cover;
+      margin: 0;
+      padding: 40px;
+      font-family: 'KaiTi', 'STKaiti', serif;
+      color: #333;
+      line-height: 1.8;
+      font-size: 20px;
+    }
+
+    #letter {
+      max-width: 800px;
+      margin: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<div id="letter"></div>
+
+<script>
+  const text = `亲爱的汪汪：
+
+今天，是我们携手走过的第一千个日子了。一千天，听起来像一条长长的星河，汇聚了太多闪烁的回忆。可你知道吗？当我回望这条星河，最耀眼、最让我心头一暖的，却永远是那最初的星光——我们相爱的一百天。
+
+那时的时光，仿佛被施了魔法……（此处可继续填写完整信件内容）
+
+爱你的
+章章`;
+
+  const container = document.getElementById('letter');
+  let i = 0;
+  const speed = 30; // 打字速度，越小越快
+
+  function typeWriter() {
+    if (i < text.length) {
+      container.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  window.onload = typeWriter;
+</script>
+
+</body>
+</html>
 
