@@ -80,9 +80,10 @@
 
     const speed = 20;
 
-    let i = 0;
+    
     function typePage(id, text, callback) {
       const container = document.getElementById(id);
+        let i = 0; 
       function type() {
         if (i < text.length) {
           container.innerHTML += text.charAt(i);
