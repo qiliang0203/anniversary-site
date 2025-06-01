@@ -11,24 +11,31 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0;
       padding-top: 40px;
     }
+
     #flipbook {
       width: 800px;
       height: 1131px;
-      margin-bottom: 40px;
     }
+
     #flipbook .page {
       width: 100%;
       height: 100%;
     }
+
     #flipbook img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
+
     .back-button {
-      margin-bottom: 20px;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 10px 20px;
       font-size: 16px;
       color: white;
@@ -36,8 +43,9 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
     }
+
     .back-button:hover {
       background-color: #ff7875;
     }
@@ -50,8 +58,7 @@
     <div class="page"><img src="red2.png" alt="Page 2" /></div>
   </div>
 
-  <!-- 返回按钮 -->
-  <button class="back-button" onclick="window.location.href='page3.html'">← 返回主页</button>
+  <button class="back-button" onclick="window.location.href='page3.html'">返回上一页</button>
 
   <script>
     $("#flipbook").turn({
