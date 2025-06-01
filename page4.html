@@ -9,12 +9,14 @@
     body {
       background: #f2f2f2;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       padding-top: 40px;
     }
     #flipbook {
       width: 800px;
-      height: 1131px; /* 比例适配 A4 页面 */
+      height: 1131px;
+      margin-bottom: 40px;
     }
     #flipbook .page {
       width: 100%;
@@ -25,6 +27,20 @@
       height: 100%;
       object-fit: contain;
     }
+    .back-button {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #ff4d4f;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .back-button:hover {
+      background-color: #ff7875;
+    }
   </style>
 </head>
 <body>
@@ -32,8 +48,10 @@
   <div id="flipbook">
     <div class="page"><img src="red1.png" alt="Page 1" /></div>
     <div class="page"><img src="red2.png" alt="Page 2" /></div>
-    <!-- 继续添加更多页面 -->
   </div>
+
+  <!-- 返回按钮 -->
+  <button class="back-button" onclick="window.location.href='page3.html'">← 返回主页</button>
 
   <script>
     $("#flipbook").turn({
