@@ -2,84 +2,75 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>千日纪念信</title>
-  <!-- 字体链接 -->
+  <title>千日纪念·信</title>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <style>
     body {
-      background-image: url('paper.jpg'); /* 使用你的信纸背景 */
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-color: #fff8f0;
       margin: 0;
-      padding: 60px 40px;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      background-image: url('paper.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 22px;
-      line-height: 2;
-      color: #3e2f1c;
-      white-space: pre-wrap;
     }
 
     #letter {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 1ch;
-      animation: blink 1s step-end infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { background-color: transparent; }
-      50% { background-color: #3e2f1c; }
+      width: 700px;
+      height: 80vh;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 40px;
+      font-size: 20px;
+      line-height: 2;
+      color: #3e2f1c;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
 
-<div id="letter"><span id="text"></span><span class="cursor">|</span></div>
+  <div id="letter"></div>
 
-<script>
-  const content = `
-亲爱的汪汪🐶：
+  <script>
+    const content = `亲爱的汪汪：
 
-今天是我们恋爱的第一千天，
-每一段旅程都有一封值得珍藏的信。
-所以我想写给你，
-写下这三年来我最想说的悄悄话……
+今天是我们在一起的第一千天。
+这封信藏了我很多想对你说的心里话。
+每一次回忆起从前，都会想起我们刚认识时的日子……
+那是我最轻松、最安心、最幸福的时光。
 
-从相识到相知，从争吵到和解，
-从你笑着叫我猪猪，到你轻轻抱我入睡，
-每一次靠近、每一声昵称、每一个眼神，
-都在告诉我：
-你，是我选定要爱很久很久的那个人。
+从第一次的表白、第一次一起散步、第一次一起看星星……
+每一个瞬间都像一颗星，串成了我们爱情的银河。
 
-谢谢你出现在我生命里，
-一千天，我只想说：
-我想要和你一起迎接第一千零一天，第二千天，第三千天，直到……
+谢谢你一直在我身边，我很幸福。
+未来的第1001天、第2000天、第10000天……
+我都想和你一起走下去 ❤️
 
-永远。
+—— 章章 🐷`;
 
-你的章章🐷
-  `;
+    const letterDiv = document.getElementById('letter');
+    let i = 0;
 
-  let i = 0;
-  const speed = 40; // 打字速度（毫秒）
-  const textEl = document.getElementById('text');
-
-  function typeWriter() {
-    if (i < content.length) {
-      textEl.textContent += content[i];
-      i++;
-      setTimeout(typeWriter, speed);
+    function typeWriter() {
+      if (i < content.length) {
+        letterDiv.innerHTML += content.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40); // 控制速度（越小越快）
+      }
     }
-  }
 
-  window.onload = typeWriter;
-</script>
+    typeWriter();
+  </script>
 
 </body>
 </html>
