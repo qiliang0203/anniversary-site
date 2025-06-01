@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>千日纪念·信封动画</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <style>
+    body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #envelopeAnimation {
+      width: 400px;
+      height: 400px;
+      cursor: pointer;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="envelopeAnimation"></div>
+  <p>点击信封开启你的纪念信</p>
+
+  <script>
+    const animation = lottie.loadAnimation({
+      container: document.getElementById('envelopeAnimation'),
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: 'envelope.json' // 确保这个 JSON 文件在同目录下
+    });
+
+    // 点击播放动画
+    document.getElementById('envelopeAnimation').addEventListener('click', function () {
+      animation.play();
+    });
+
+    // 动画播放完成后跳转
+    animation.addEventListener('complete', function () {
+      window.location.href = "page6.html"; // 替换为你希望跳转的页面
+    });
+  </script>
+
+</body>
+</html>
 
