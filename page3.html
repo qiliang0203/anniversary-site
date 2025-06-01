@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1000 天纪念图</title>
+  <title>我们的第1000天</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-color: #ffffff;
+      background: white;
     }
     img {
       max-width: 100%;
@@ -15,18 +15,27 @@
     }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4 bg-white">
+<body class="flex flex-col items-center justify-center text-center min-h-screen text-pink-600 p-6">
 
-  <h1 class="text-4xl font-bold text-pink-600 mb-8">我们在一起的第 1000 天 ❤️</h1>
+  <h1 class="text-4xl font-extrabold mb-6">我们在一起的第 1000 天 ❤️</h1>
 
-  <!-- 拼图图片展示 -->
-  <img src="1000.png" alt="1000天拼图" class="shadow-lg rounded-lg max-w-5xl">
+  <img src="1000.png" alt="1000 天拼图" class="rounded-xl shadow-xl max-w-5xl mb-8">
 
-  <!-- 返回按钮 -->
-  <a href="page2.html" target="content-frame"
-     class="mt-8 bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition">
-    返回上一页
-  </a>
+  <!-- 四个按钮对应 page4 ~ page7 -->
+  <div class="flex flex-wrap gap-4 justify-center">
+    <a href="page4.html" target="content-frame"
+       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第一个 1</a>
+    <a href="page5.html" target="content-frame"
+       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第一个 0</a>
+    <a href="page6.html" target="content-frame"
+       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第二个 0</a>
+    <a href="page7.html" target="content-frame"
+       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第二个 0</a>
+  </div>
+
+  <!-- 可选：回到首页按钮 -->
+  <a href="page1.html" target="content-frame"
+     class="mt-6 underline text-sm text-gray-500 hover:text-pink-400">回到首页</a>
 
 </body>
 </html>
