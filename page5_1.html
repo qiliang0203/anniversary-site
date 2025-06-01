@@ -1,48 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>纪念信 · page6</title>
+  <meta charset="UTF-8" />
+  <title>千日纪念信</title>
+  <!-- 字体链接 -->
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <style>
     body {
-      background: url('paper.jpg') no-repeat center center fixed; /* 背景图片 */
-      background-size: cover;
+      background-image: url('paper.jpg'); /* 使用你的信纸背景 */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-color: #fff8f0;
       margin: 0;
-      padding: 40px;
-      font-family: 'KaiTi', 'STKaiti', serif;
-      color: #333;
-      line-height: 1.8;
-      font-size: 20px;
+      padding: 60px 40px;
+      font-family: 'ZCOOL KuaiLe', cursive;
+      font-size: 22px;
+      line-height: 2;
+      color: #3e2f1c;
+      white-space: pre-wrap;
     }
 
     #letter {
-      max-width: 800px;
-      margin: auto;
-      white-space: pre-wrap;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 1ch;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { background-color: transparent; }
+      50% { background-color: #3e2f1c; }
     }
   </style>
 </head>
 <body>
 
-<div id="letter"></div>
+<div id="letter"><span id="text"></span><span class="cursor">|</span></div>
 
 <script>
-  const text = `亲爱的汪汪：
+  const content = `
+亲爱的汪汪🐶：
 
-今天，是我们携手走过的第一千个日子了。一千天，听起来像一条长长的星河，汇聚了太多闪烁的回忆。可你知道吗？当我回望这条星河，最耀眼、最让我心头一暖的，却永远是那最初的星光——我们相爱的一百天。
+今天是我们恋爱的第一千天，
+每一段旅程都有一封值得珍藏的信。
+所以我想写给你，
+写下这三年来我最想说的悄悄话……
 
-那时的时光，仿佛被施了魔法……（此处可继续填写完整信件内容）
+从相识到相知，从争吵到和解，
+从你笑着叫我猪猪，到你轻轻抱我入睡，
+每一次靠近、每一声昵称、每一个眼神，
+都在告诉我：
+你，是我选定要爱很久很久的那个人。
 
-爱你的
-章章`;
+谢谢你出现在我生命里，
+一千天，我只想说：
+我想要和你一起迎接第一千零一天，第二千天，第三千天，直到……
 
-  const container = document.getElementById('letter');
+永远。
+
+你的章章🐷
+  `;
+
   let i = 0;
-  const speed = 30; // 打字速度，越小越快
+  const speed = 40; // 打字速度（毫秒）
+  const textEl = document.getElementById('text');
 
   function typeWriter() {
-    if (i < text.length) {
-      container.innerHTML += text.charAt(i);
+    if (i < content.length) {
+      textEl.textContent += content[i];
       i++;
       setTimeout(typeWriter, speed);
     }
@@ -53,4 +83,3 @@
 
 </body>
 </html>
-
