@@ -2,98 +2,70 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>千日纪念·信</title>
+  <title>千日纪念信</title>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      overflow: hidden;
-      background-image: url('paper.jpg');
-      background-size: 80%; /* 控制缩小比例，可调节为 60%、70% 等 */
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-
+      background-color: #ffeef2; /* 淡粉背景 */
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'ZCOOL KuaiLe', cursive;
     }
 
-    #letter {
-      width: 700px;
-      height: 80vh;
-      background-color: rgba(255, 255, 255, 0.7);
+    .paper {
+      width: 70%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.8);
       padding: 40px;
-      font-size: 20px;
-      line-height: 2;
-      color: #3e2f1c;
       border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-size: 20px;
+      line-height: 1.8;
+      color: #333;
       white-space: pre-wrap;
+      min-height: 500px;
     }
   </style>
 </head>
 <body>
 
-  <div id="letter"></div>
+  <div class="paper" id="letter"></div>
 
   <script>
-    const content = `亲爱的汪汪：
+    const text = `亲爱的汪汪：
 
 今天是我们在一起的第一千天。
-这封信藏了我很多想对你说的心里话。
-每一次回忆起从前，都会想起我们刚认识时的日子……
+这封信藏了我很想对你说的心里话。
+
+每一次回忆起来以前，都会想起我们刚认识时的日子……
 那是我最轻松、最安心、最幸福的时光。
 
 从第一次的表白、第一次一起散步、第一次一起看星星……
 每一个瞬间都像一颗星，串成了我们爱情的银河。
 
 谢谢你一直在我身边，我很幸福。
-未来的第1001天、第2000天、第10000天……
-我都想和你一起走下去 ❤️
-今天是我们在一起的第一千天。
-这封信藏了我很多想对你说的心里话。
-每一次回忆起从前，都会想起我们刚认识时的日子……
-那是我最轻松、最安心、最幸福的时光。
 
-从第一次的表白、第一次一起散步、第一次一起看星星……
-每一个瞬间都像一颗星，串成了我们爱情的银河。
-
-谢谢你一直在我身边，我很幸福。
-未来的第1001天、第2000天、第10000天……
-我都想和你一起走下去 ❤️
-今天是我们在一起的第一千天。
-这封信藏了我很多想对你说的心里话。
-每一次回忆起从前，都会想起我们刚认识时的日子……
-那是我最轻松、最安心、最幸福的时光。
-
-从第一次的表白、第一次一起散步、第一次一起看星星……
-每一个瞬间都像一颗星，串成了我们爱情的银河。
-
-谢谢你一直在我身边，我很幸福。
-未来的第1001天、第2000天、第10000天……
+未来的第1001天，第2000天，第10000天……
 我都想和你一起走下去 ❤️
 
 —— 章章 🐷`;
 
-    const letterDiv = document.getElementById('letter');
+    const container = document.getElementById("letter");
     let i = 0;
 
     function typeWriter() {
-      if (i < content.length) {
-        letterDiv.innerHTML += content.charAt(i);
+      if (i < text.length) {
+        container.innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 40); // 控制速度（越小越快）
+        setTimeout(typeWriter, 40); // 每个字出现速度（越小越快）
       }
     }
 
-    typeWriter();
+    window.onload = typeWriter;
   </script>
 
 </body>
