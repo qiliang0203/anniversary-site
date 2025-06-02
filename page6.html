@@ -2,106 +2,104 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>我们的1000天纪念相册</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <!-- 加载依赖 -->
+  <title>我们的 1000 天纪念相册</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 依赖：jQuery + Turn.js（使用 jsDelivr GitHub CDN） -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="turn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/blasten/turn.js@master/lib/turn.min.js"></script>
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #f8f8f8;
-      overflow: hidden;
-      font-family: sans-serif;
+    html,body{
+      margin:0;padding:0;height:100%;overflow:hidden;
+      background:#f5f6fa;font-family:sans-serif;
     }
 
-    #flipbook {
-      width: 1600px; /* 每页800px */
-      height: 1100px; /* A4比例 */
-      margin: auto;
-      margin-top: 3vh;
+    /* 翻书容器：单页 850×1100，居中 */
+    #flipbook{
+      width:850px;          /* 一页宽 */
+      height:1100px;        /* 一页高（3:4）*/
+      margin:auto;
+      margin-top:2vh;
     }
 
-    .page {
-      background: white;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    /* 页面基样式 */
+    .page{
+      background:#fff;
+      box-shadow:0 0 15px rgba(0,0,0,0.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .page img {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
-  background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 可选小边框感 */
-  border-radius: 10px; /* 可选圆角 */
+    .page img{
+      max-width:90%;        /* 给图片留一点白边 */
+      max-height:90%;
+      object-fit:contain;  /* 不裁剪、不变形 */
+      display:block;
     }
 
-    /* 翻页按钮（可选） */
-    .nav-btn {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 36px;
-      background: rgba(255,255,255,0.7);
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      z-index: 999;
+    /* 左右箭头按钮，可选 */
+    .nav-btn{
+      position:fixed;top:50%;transform:translateY(-50%);
+      font-size:40px;background:rgba(255,255,255,.7);
+      border:none;border-radius:50%;width:50px;height:50px;
+      line-height:50px;text-align:center;cursor:pointer;
+      z-index:999;user-select:none;
     }
-
-    #prevBtn { left: 10px; }
-    #nextBtn { right: 10px; }
+    #prevBtn{left:10px;}  #nextBtn{right:10px;}
   </style>
 </head>
 <body>
 
-<!-- 翻页按钮 -->
+<!-- 翻页按钮（想隐藏就删掉这两行） -->
 <button class="nav-btn" id="prevBtn">❮</button>
 <button class="nav-btn" id="nextBtn">❯</button>
 
-<!-- 翻书容器 -->
+<!-- 翻书主体：按顺序放你的图片 -->
 <div id="flipbook">
-  <div class="page"><img src="cover.png"></div> <!-- 封面 -->
-  <div class="page"><img src="wuyuan1.png"></div>
-  <div class="page"><img src="wuyuan2.png"></div>
-  <div class="page"><img src="wuyuan3.png"></div>
-
+  <div class="page"><img src="page1.png"  alt="page1"></div>
+  <div class="page"><img src="page2.png"  alt="page2"></div>
+  <div class="page"><img src="page3.png"  alt="page3"></div>
+  <div class="page"><img src="page4.png"  alt="page4"></div>
+  <div class="page"><img src="page5.png"  alt="page5"></div>
+  <!-- 继续添加 … -->
 </div>
 
 <script>
-  $(function () {
-    $('#flipbook').turn({
-      width: 1600,
-      height: 1100,
-      autoCenter: true,
-      display: 'double',
-      when: {
-        turning: function (e, page) {
-          const total = $('#flipbook').turn('pages');
-          if (page === 1 || page === total) {
-            $('#flipbook').turn('display', 'single');
-          } else {
-            $('#flipbook').turn('display', 'double');
-          }
-        }
-      }
-    });
+$(function () {
 
-    // 按钮翻页
-    $('#prevBtn').click(() => $('#flipbook').turn('previous'));
-    $('#nextBtn').click(() => $('#flipbook').turn('next'));
-
-    // 键盘翻页
-    $(document).keydown(function (e) {
-      if (e.key === 'ArrowLeft') $('#flipbook').turn('previous');
-      if (e.key === 'ArrowRight') $('#flipbook').turn('next');
-    });
+  /* Turn.js 初始化 —— 单页模式 */
+  $('#flipbook').turn({
+    width: 850,
+    height: 1100,
+    display: 'single',      // ★ 关键：单页展示
+    autoCenter: true,
+    acceleration: true,
+    gradients: true,
+    elevation: 50
   });
-</script>
 
+  /* 按钮翻页 */
+  $('#prevBtn').on('click', ()=> $('#flipbook').turn('previous'));
+  $('#nextBtn').on('click', ()=> $('#flipbook').turn('next'));
+
+  /* 键盘翻页 */
+  $(document).on('keydown', e=>{
+    if(e.key==='ArrowLeft')  $('#flipbook').turn('previous');
+    if(e.key==='ArrowRight') $('#flipbook').turn('next');
+  });
+
+  /* 浏览器窗口缩放时，只调整尺寸，不销毁重建 */
+  const resizeFlipbook = ()=>{
+    const h = Math.min(window.innerHeight*0.9,1100);
+    const w = h*0.773;      // 3:4 比例 (850/1100≈0.773)
+    $('#flipbook').turn('size', w, h);
+  };
+  resizeFlipbook();
+  $(window).on('resize', resizeFlipbook);
+
+});
+</script>
 </body>
 </html>
