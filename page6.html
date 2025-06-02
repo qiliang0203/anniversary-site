@@ -2,52 +2,92 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>我们的第1000天纪念相册</title>
+  <title>我们的1000天纪念相册</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://www.turnjs.com/lib/turn.min.js"></script>
   <style>
     body {
       margin: 0;
-      background: #fefefe;
+      background: #f7f7f7;
       font-family: sans-serif;
     }
     #flipbook {
       width: 90%;
       height: 90vh;
       margin: auto;
-      margin-top: 2vh;
+      margin-top: 5vh;
     }
     #flipbook .page {
-      width: 100%;
-      height: 100%;
       background: white;
       box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+    #flipbook .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #start-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #start-overlay button {
+      font-size: 24px;
+      padding: 20px 40px;
+      background: #ec4899;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<!-- 背景音乐 -->
-<audio autoplay loop>
+<!-- 用户点击后播放音乐 -->
+<div id="start-overlay">
+  <button onclick="startAlbum()">开始纪念之旅 🎵</button>
+</div>
+
+<audio id="bg-music" loop>
   <source src="your_music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 翻页书主体 -->
 <div id="flipbook">
-  <div class="page"><img src="cover.png" alt="封面" /></div>
+  <div class="page"><img src="cover.png" /></div>
   <div class="page"><img src="wuyuan1.png" /></div>
   <div class="page"><img src="wuyuan2.png" /></div>
-  <div class="page"><img src="wuyuan3.png" /></div>
+  <div class="page"><img src="wuyaun3.png" /></div>
 </div>
 
 <script>
-  $('#flipbook').turn({
-    width: 1000,
-    height: 700,
-    autoCenter: true
+  function startAlbum() {
+    document.getElementById('start-overlay').style.display = 'none';
+    document.getElementById('bg-music').play();
+
+    $('#flipbook').turn({
+      width: Math.min(window.innerWidth * 0.9, 1000),
+      height: window.innerHeight * 0.9,
+      autoCenter: true
+    });
+  }
+
+  // 页面大小变化时重新初始化
+  window.addEventListener('resize', function () {
+    if ($("#flipbook").data("turn")) {
+      $('#flipbook').turn('destroy').html($('#flipbook').html());
+      startAlbum(); // 重新初始化
+    }
   });
 </script>
 
 </body>
 </html>
-
