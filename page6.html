@@ -1,93 +1,126 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>我们的1000天纪念相册</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      background: #f7f7f7;
-      font-family: sans-serif;
-    }
-    #flipbook {
-      width: 90%;
-      height: 90vh;
-      margin: auto;
-      margin-top: 5vh;
-    }
-    #flipbook .page {
-      background: white;
-      box-shadow: 0 0 15px rgba(0,0,0,0.15);
-    }
-    #flipbook .page img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>我们的 1000 天纪念相册</title>
 
-    #start-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: white;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #start-overlay button {
-      font-size: 24px;
-      padding: 20px 40px;
-      background: #ec4899;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
-  </style>
+<!-- 依赖 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.turnjs.com/lib/turn.min.js"></script>
+
+<style>
+  /* 整页无滚动条 */
+  html,body{
+    margin:0;
+    height:100%;
+    overflow:hidden;
+    background:#f7f7f7;
+    font-family:sans-serif;
+  }
+
+  /* 相册容器 */
+  #flipbook{
+    width:90%;
+    height:90vh;
+    margin:auto;
+    margin-top:5vh;
+  }
+  #flipbook .page{
+    background:#fff;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
+  }
+  #flipbook .page img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* 覆盖层按钮（首次点击后播放音乐并初始化翻书） */
+  #start-overlay{
+    position:fixed;inset:0;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    z-index:999;
+  }
+  #start-overlay button{
+    font-size:24px;padding:20px 40px;
+    background:#ec4899;color:#fff;border:none;border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);cursor:pointer;
+  }
+
+  /* 左右翻页箭头（可删） */
+  .nav-btn{
+    position:fixed;top:50%;transform:translateY(-50%);
+    font-size:38px;background:none;border:none;color:#999;opacity:.6;
+    cursor:pointer;user-select:none;
+  }
+  .nav-btn:hover{opacity:1}
+  #prevBtn{left:15px;} #nextBtn{right:15px;}
+</style>
 </head>
 <body>
 
-<!-- 用户点击后播放音乐 -->
+<!-- 首次点击 -->
 <div id="start-overlay">
   <button onclick="startAlbum()">开始纪念之旅 🎵</button>
 </div>
 
+<!-- 音乐 -->
 <audio id="bg-music" loop>
   <source src="your_music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- 翻书容器（每个 .page 一张“纸”） -->
 <div id="flipbook">
-  <div class="page"><img src="cover.png" /></div>
-  <div class="page"><img src="wuyuan1.png" /></div>
-  <div class="page"><img src="wuyuan2.png" /></div>
-  <div class="page"><img src="wuyuan3.png" /></div>
+  <div class="page"><img src="cover.png"></div>
+  <div class="page"><img src="wuyuan1.png"></div>
+  <div class="page"><img src="wuyuan2.png"></div>
+  <div class="page"><img src="wuyuan3.png"></div>
 </div>
 
+<!-- 左右箭头 -->
+<button id="prevBtn" class="nav-btn" onclick="$('#flipbook').turn('previous')">❮</button>
+<button id="nextBtn" class="nav-btn" onclick="$('#flipbook').turn('next')">❯</button>
+
 <script>
-  function startAlbum() {
-    document.getElementById('start-overlay').style.display = 'none';
-    document.getElementById('bg-music').play();
+function initFlipbook(){
+  const w = Math.min(window.innerWidth*0.9,1000), h = window.innerHeight*0.9;
 
-    $('#flipbook').turn({
-      width: Math.min(window.innerWidth * 0.9, 1000),
-      height: window.innerHeight * 0.9,
-      autoCenter: true
-    });
-  }
-
-  // 页面大小变化时重新初始化
-  window.addEventListener('resize', function () {
-    if ($("#flipbook").data("turn")) {
-      $('#flipbook').turn('destroy').html($('#flipbook').html());
-      startAlbum(); // 重新初始化
-    }
+  $('#flipbook').turn({
+    width:w,
+    height:h,
+    autoCenter:true,
+    display:'double',        // 关键：双页摊开
+    acceleration:true,
+    elevation:50,
+    gradients:true,
+    turnCorners:"bl,br"      // 允许从左下/右下翻动
   });
-</script>
+}
 
+function startAlbum(){
+  document.getElementById('start-overlay').style.display='none';
+  document.getElementById('bg-music').play();
+  initFlipbook();
+}
+
+/* 窗口变化时，若 flipbook 已初始化则只调尺寸，不销毁重建 */
+window.addEventListener('resize', ()=>{
+  if($('#flipbook').data('turn')){
+    $('#flipbook').turn('size',
+      Math.min(window.innerWidth*0.9,1000),
+      window.innerHeight*0.9);
+  }
+});
+
+/* 键盘 ← / → 翻页（可选） */
+document.addEventListener('keydown',e=>{
+  if(!$('#flipbook').data('turn')) return;
+  if(e.key==='ArrowLeft') $('#flipbook').turn('previous');
+  if(e.key==='ArrowRight')$('#flipbook').turn('next');
+});
+</script>
 </body>
 </html>
