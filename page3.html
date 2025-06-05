@@ -19,21 +19,30 @@
 
   <h1 class="text-4xl font-extrabold mb-6">我们在一起的第 1000 天 ❤️</h1>
 
-  <img src="1000.png" alt="1000 天拼图" class="rounded-xl shadow-xl max-w-5xl mb-8">
+  <!-- 图片与按钮定位容器 -->
+  <div class="relative max-w-5xl w-full mb-24">
+    <img src="1000.png" alt="1000 天拼图" class="rounded-xl shadow-xl w-full">
 
-  <!-- 四个按钮对应 page4 ~ page7 -->
-  <div class="flex flex-wrap gap-4 justify-center">
+    <!-- 四个按钮定位到对应数字下方 -->
     <a href="page4.html" target="content-frame"
-       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第一个 1</a>
+       class="absolute bottom-[-3rem] left-[12%] bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
+      第一个 1
+    </a>
     <a href="page5.html" target="content-frame"
-       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第一个 0</a>
+       class="absolute bottom-[-3rem] left-[37%] bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
+      第一个 0
+    </a>
     <a href="page6.html" target="content-frame"
-       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第二个 0</a>
+       class="absolute bottom-[-3rem] left-[62%] bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
+      第二个 0
+    </a>
     <a href="page7.html" target="content-frame"
-       class="bg-pink-600 text-white font-bold py-2 px-5 rounded-full shadow hover:scale-105 transition">第二个 0</a>
+       class="absolute bottom-[-3rem] left-[87%] bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
+      第二个 0
+    </a>
   </div>
 
-  <!-- 可选：回到首页按钮 -->
+  <!-- 可选：返回首页按钮 -->
   <a href="page1.html" target="content-frame"
      class="mt-6 underline text-sm text-gray-500 hover:text-pink-400">回到首页</a>
 
