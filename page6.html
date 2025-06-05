@@ -10,55 +10,85 @@
   <script src="turn.min.js"></script>
 
   <style>
-    html,body{
-      margin:0;padding:0;height:100%;overflow:hidden;
-      background:#f5f6fa;font-family:sans-serif;
+    html, body {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      background: #f5f6fa; font-family: sans-serif;
     }
 
-    /* 翻书容器：单页 850×1100，居中 */
-    #flipbook{
-      width:850px;          /* 一页宽 */
-      height:1100px;        /* 一页高（3:4）*/
-      margin:auto;
-      margin-top:2vh;
+    #flipbook {
+      width: 850px;
+      height: 1100px;
+      margin: auto;
+      margin-top: 2vh;
       padding: 30px 0;
     }
 
-    /* 页面基样式 */
-   .page{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(#e6edff 0%, #f8faff 100%);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-    .page img{
-  max-width:95%;
-  max-height:95%;
-  object-fit:contain;
-  border-radius:12px;          /* 3. 加圆角 */
-  box-shadow:0 6px 18px rgba(0,0,0,.12);  /* 3. 柔和阴影 */
-}
-
-    /* 左右箭头按钮，可选 */
-    .nav-btn{
-      position:fixed;top:50%;transform:translateY(-50%);
-      font-size:40px;background:rgba(255,255,255,.7);
-      border:none;border-radius:50%;width:50px;height:50px;
-      line-height:50px;text-align:center;cursor:pointer;
-      z-index:999;user-select:none;
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#e6edff 0%, #f8faff 100%);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     }
-    #prevBtn{left:10px;}  #nextBtn{right:10px;}
+
+    .page img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      background: rgba(255, 255, 255, .7);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 999;
+      user-select: none;
+    }
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+
+    /* 新增：返回按钮样式 */
+    #backBtn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #e91e63;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+
+    #backBtn:hover {
+      background: #d81b60;
+      transform: translateX(-50%) scale(1.05);
+    }
   </style>
 </head>
 <body>
 
-<!-- 翻页按钮（想隐藏就删掉这两行） -->
+<!-- 翻页按钮 -->
 <button class="nav-btn" id="prevBtn">❮</button>
 <button class="nav-btn" id="nextBtn">❯</button>
 
-<!-- 翻书主体：按顺序放你的图片 -->
+<!-- 翻书主体 -->
 <div id="flipbook">
   <div class="page"><img src="1.png"  alt="page1"></div>
   <div class="page"><img src="2.png"  alt="page2"></div>
@@ -80,37 +110,35 @@
   <div class="page"><img src="18.png"  alt="page4"></div>
   <div class="page"><img src="19.png"  alt="page1"></div>
   <div class="page"><img src="20.png"  alt="page2"></div>
-  <!-- 继续添加 … -->
 </div>
+
+<!-- 返回 page3 的按钮 -->
+<button id="backBtn" onclick="window.location.href='page3.html'">← 返回封面</button>
 
 <script>
 $(function () {
 
-  /* Turn.js 初始化 —— 单页模式 */
   $('#flipbook').turn({
     width: 850,
     height: 1100,
-    display: 'single',      // ★ 关键：单页展示
+    display: 'single',
     autoCenter: true,
     acceleration: true,
     gradients: true,
     elevation: 50
   });
 
-  /* 按钮翻页 */
-  $('#prevBtn').on('click', ()=> $('#flipbook').turn('previous'));
-  $('#nextBtn').on('click', ()=> $('#flipbook').turn('next'));
+  $('#prevBtn').on('click', () => $('#flipbook').turn('previous'));
+  $('#nextBtn').on('click', () => $('#flipbook').turn('next'));
 
-  /* 键盘翻页 */
-  $(document).on('keydown', e=>{
-    if(e.key==='ArrowLeft')  $('#flipbook').turn('previous');
-    if(e.key==='ArrowRight') $('#flipbook').turn('next');
+  $(document).on('keydown', e => {
+    if (e.key === 'ArrowLeft') $('#flipbook').turn('previous');
+    if (e.key === 'ArrowRight') $('#flipbook').turn('next');
   });
 
-  /* 浏览器窗口缩放时，只调整尺寸，不销毁重建 */
-  const resizeFlipbook = ()=>{
-    const h = Math.min(window.innerHeight*0.9,1100);
-    const w = h*0.773;      // 3:4 比例 (850/1100≈0.773)
+  const resizeFlipbook = () => {
+    const h = Math.min(window.innerHeight * 0.9, 1100);
+    const w = h * 0.773;
     $('#flipbook').turn('size', w, h);
   };
   resizeFlipbook();
@@ -118,5 +146,6 @@ $(function () {
 
 });
 </script>
+
 </body>
 </html>
