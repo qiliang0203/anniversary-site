@@ -2,21 +2,34 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>论文原文 - PDF 展示</title>
+  <title>论文原文展示</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
+      font-family: sans-serif;
+    }
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background: #4a90e2;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
     }
     iframe {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       border: none;
     }
   </style>
 </head>
 <body>
-  <iframe src="wechat_relationship_analysis.pdf"></iframe>
+
+  <a href="page7.html" class="back-btn">← 返回封面页</a>
+
+  <iframe src="report.pdf"></iframe>
+
 </body>
 </html>
