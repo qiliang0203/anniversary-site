@@ -2,49 +2,119 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我们的第1000天</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>千日纪念信</title>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
   <style>
     body {
-      background: white;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #ffeef2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'ZCOOL KuaiLe', cursive;
     }
-    img {
-      max-width: 100%;
-      height: auto;
+
+    .paper {
+      width: 70%;
+      max-width: 800px;
+      height: 80vh;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-size: 20px;
+      line-height: 1.8;
+      color: #333;
+      white-space: pre-wrap;
+      overflow-y: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .paper:hover {
+      overflow-y: auto;
+    }
+
+    .paper::-webkit-scrollbar {
+      width: 8px;
+    }
+    .paper::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 4px;
+    }
+
+    .back-button {
+      margin-top: 20px;
+    }
+
+    .back-button button {
+      background-color: #ff7f9f;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .back-button button:hover {
+      background-color: #e66484;
     }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center text-center min-h-screen text-pink-600 p-6">
+<body>
 
-  <h1 class="text-4xl font-extrabold mb-6">我们在一起的第 1000 天 ❤️</h1>
+  <div class="paper" id="letter"></div>
 
-  <!-- 图像和按钮容器 -->
-  <div class="relative max-w-5xl w-full mb-24">
-    <img src="1000.png" alt="1000 天拼图" class="rounded-xl shadow-xl w-full">
-
-    <!-- 精准按钮 -->
-    <a href="page4.html" target="content-frame"
-       class="absolute bottom-[-3.5rem] left-[7.5%] -translate-x-1/2 bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
-      第一个 1
-    </a>
-    <a href="page5.html" target="content-frame"
-       class="absolute bottom-[-3.5rem] left-[30%] -translate-x-1/2 bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
-      第一个 0
-    </a>
-    <a href="page6.html" target="content-frame"
-       class="absolute bottom-[-3.5rem] left-[56%] -translate-x-1/2 bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
-      第二个 0
-    </a>
-    <a href="page7.html" target="content-frame"
-       class="absolute bottom-[-3.5rem] left-[81%] -translate-x-1/2 bg-pink-600 text-white font-bold py-2 px-4 rounded-full shadow hover:scale-105 transition">
-      第二个 0
-    </a>
+  <div class="back-button">
+    <button onclick="location.href='page3.html'">返回</button>
   </div>
 
-  <!-- 返回首页 -->
-  <a href="page1.html" target="content-frame"
-     class="mt-6 underline text-sm text-gray-500 hover:text-pink-400">回到首页</a>
+  <script>
+    const text = `亲爱的汪汪：
+
+见字如面。
+
+虽然这不是我手写的字（我的字也没这么好看），但我一直觉得欠你一封郑重的道歉信。临行前匆匆写下的那些，字迹歪歪扭扭，藏不住我的窘迫与仓促。而这封信不同，我花了很久，用清晰的字体敲打出来，希望你看得舒服，没有错别字的困扰。（: 我希望通过它，把我最真诚的心意、最深的歉意和最坚定的决定，都传达给你。
+
+汪汪，我必须再次，也最郑重地向你道歉。为我那时决定出国时所造成的伤害。那个时候，我以为自己在追寻一个“更好未来”的目标——转专业的可能、父母的期望、外面世界的诱惑，让我眼前起了雾。我以为，“就两年”、“我会回来”、“为了我们俩的未来”这些话，能缓解我们的不安。但事实上，那只是在逃避真正的问题——我没有真正和你并肩面对，也没有把你的心情和未来放进我的决定里。我享受着你无条件的陪伴，却没有换位思考，没有意识到你默默承受的委屈和牺牲。现在回头看，那种自以为是的“为你好”，其实只是我自己还不够成熟。
+
+备考托福的那段时间，是我人生中最灰暗的时光之一。压力、焦虑、疲惫吞没了我，我也因此在我们之间变得冷漠迟钝。我没能给你情绪上的回应，甚至每次约会都带着心不在焉的态度，给你的，只有一句敷衍的“我本来就这样”。而最让我痛心和后悔的，是那场校园马拉松。你身体不舒服，却依然为了承诺坚持参赛；而我，却窝在图书馆，只想着那些所谓重要的目标，把你、你的期待、你需要我陪伴的时刻，都置于不顾。直到你流着泪出现在我面前，说出“我们坚持不下去了，要不然分手吧”，我才被彻底击醒。那一刻，我才真正意识到，我并不是一个在“努力为了未来”的人，而是一个正在“失去眼前幸福”的人。更让我愧疚的是，事后依然是你主动来找我，包容我、安慰我，倾听我所谓的压力和苦衷。你总是这样，用自己的善良，给我一次又一次成长的机会。而我，却一次次浪费了它。
+
+来到这片陌生的土地后，我才终于明白：所谓的“更好未来”，并不是靠逃离而获得的。转专业的压力、异乡的孤独、找工作的困难……这些都没有我原以为的光鲜。最让我感到失落的，不是这些客观问题，而是每天醒来都缺少了你的声音、你的小抱怨、你那一句“想我了没”。原来，我心里最重要的“未来”，早就在过去和你一起的每一个平凡日子里。
+
+我终于意识到，什么是真正的责任。任何有关我们未来的决定，都不该是我一个人擅自作出的结论。我们应该共同面对、共同承担。我曾经把“为我们好”的决定留给了自己，其实那样的“为你好”，只是自私的伤害。
+
+我终于意识到，什么是真正的好。外界的评价、浮华的履历、看似光明的路径，都比不上你给我的安全感和幸福感。你温柔地望着我的眼神，你难过时期待我抱抱的样子，你一遍遍体贴地照顾我的情绪……这一切，比任何头衔和未来都更让我安心。
+
+而最近，我们的矛盾再次让我痛彻心扉。我原本已经为暑假的实习安排好了回国，想象着和你重聚的每一刻，可当计划因政策突变被打乱时，我自己也陷入情绪的低谷。可即便如此，我也不该忽略你的情绪、不该冷暴力你，更不该在你失望时，还让你看到我在和朋友打游戏、笑得那么开心……那一幕，我知道对你有多伤。你的心早已疲惫，而我还在逃避责任。
+
+这不是第一次了，汪汪。我一次次在你最需要我的时候失职，一次次把情绪藏起来，像个孩子一样赌气，用沉默代替沟通。你一次次给我机会，而我却用冷淡辜负了你。
+
+我知道，那道伤痕并不会因为一封信就消失。你受过的伤、流过的泪、忍受的孤单，都是真实的。但我真心希望你能看到，现在的我，已经不再是那个只会说“以后会好”的我。我愿意用行动去修补，而不是空洞的承诺去掩饰。
+
+如果你愿意，我们可以慢慢来。不急着原谅、不急着回到从前。但我真诚希望，能重新牵起你的手，一起走向更真实、更稳固的未来。我在这里，带着我的歉意、我的改变和我的爱，一直在等你。
+
+永远爱你的，
+章章
+2025年6月6日`;
+
+    const container = document.getElementById("letter");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        container.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+
+    window.onload = typeWriter;
+  </script>
 
 </body>
 </html>
